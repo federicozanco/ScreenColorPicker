@@ -8,7 +8,6 @@ Foundation) with some smart features.
  - **S**: starts/stops capturing;
  - **O**: sets the current mouse pointer position as origin;
  - **Ctrl-O**: resets the origin point to first screen's (0, 0);
- - **Ctrl-O**: resets the origin point to first screen's (0, 0);
  - **Ctrl-C**: copies the current Hexadecimal value;
  - **Esc**: exits;
 
