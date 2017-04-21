@@ -67,7 +67,6 @@ namespace ScreenColorPicker
                 NotifyPropertyChanged(() => Brush);
                 NotifyPropertyChanged(() => X);
                 NotifyPropertyChanged(() => Y);
-                NotifyPropertyChanged(() => A);
                 NotifyPropertyChanged(() => R);
                 NotifyPropertyChanged(() => G);
                 NotifyPropertyChanged(() => B);
@@ -98,14 +97,6 @@ namespace ScreenColorPicker
         /// The y.
         /// </value>
         public int Y { get { return (int)(position.Y - origin.Y); } }
-
-        /// <summary>
-        /// Gets a.
-        /// </summary>
-        /// <value>
-        /// a.
-        /// </value>
-        public int A { get { return screenPixelColor.A; } }
 
         /// <summary>
         /// Gets the r.

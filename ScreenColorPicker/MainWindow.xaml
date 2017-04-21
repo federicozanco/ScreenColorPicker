@@ -104,10 +104,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="40" />
                 <ColumnDefinition Width="20" />
@@ -115,68 +115,63 @@
                 <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
 
-            <!-- Color -->
-            <Rectangle Fill="{Binding Brush}"
-                       Grid.RowSpan="5"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Right"
-                       Margin="0,0,5,0"
-                       Width="30"
-                       Height="100" />
-
             <!-- X -->
-            <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+            <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=BaseBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Text="X" />
             </Border>
-            <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource ResourceKey=DataBorderStyle}">
+            <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource ResourceKey=DataBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding X}" />
             </Border>
 
             <!-- Y -->
-            <Border Grid.Row="0" Grid.Column="4" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+            <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource ResourceKey=BaseBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Text="Y" />
             </Border>
-            <Border Grid.Row="0" Grid.Column="5" Style="{StaticResource ResourceKey=DataBorderStyle}">
+            <Border Grid.Row="0" Grid.Column="4" Style="{StaticResource ResourceKey=DataBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding Y}" />
             </Border>
 
-            <!-- A -->
-            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource ResourceKey=BaseBorderStyle}">
-                <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Background="Gray" Text="A" />
-            </Border>
-            <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource ResourceKey=DataBorderStyle}">
-                <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding A}" />
-            </Border>
-
             <!-- R -->
-            <Border Grid.Row="1" Grid.Column="4" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+            <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource ResourceKey=BaseBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Background="Red" Text="R" />
             </Border>
-            <Border Grid.Row="1" Grid.Column="5" Style="{StaticResource ResourceKey=DataBorderStyle}">
+            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource ResourceKey=DataBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding R}" />
             </Border>
 
             <!-- G -->
-            <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+            <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource ResourceKey=BaseBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Background="Green" Text="G" />
             </Border>
-            <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource ResourceKey=DataBorderStyle}">
+            <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource ResourceKey=DataBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding G}" />
             </Border>
 
             <!-- B -->
-            <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+            <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource ResourceKey=BaseBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Background="Blue" Text="B" />
             </Border>
-            <Border Grid.Row="2" Grid.Column="5" Style="{StaticResource ResourceKey=DataBorderStyle}">
+            <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource ResourceKey=DataBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding B}" />
             </Border>
 
+            <!-- Color -->
+            <Rectangle Grid.Row="1"
+                       Grid.Column="3"
+                       Fill="{Binding Brush}"
+                       Grid.RowSpan="3"
+                       Grid.ColumnSpan="2"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="5"
+                       Width="50"
+                       Height="40" />
+            
             <!-- Hex -->
-            <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+            <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource ResourceKey=BaseBorderStyle}">
                 <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Text="H" />
             </Border>
-            <Border Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4" Style="{StaticResource ResourceKey=DataBorderStyle}">
+            <Border Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Style="{StaticResource ResourceKey=DataBorderStyle}">
                 <TextBox BorderThickness="0" Foreground="Black" Background="White" TextAlignment="Center" IsReadOnly="True" Text="{Binding Hex, Mode=OneWay}" />
             </Border>
 
@@ -190,7 +185,7 @@
                     Command="{Binding StartStopCommand}" /> -->
 
             <!-- Zoom -->
-            <Image Grid.Row="4"
+            <Image Grid.Row="5"
                    Grid.Column="1"
                    Grid.ColumnSpan="5"
                    Name="Zoom"
