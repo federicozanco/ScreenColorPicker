@@ -1,12 +1,205 @@
-﻿<Window x:Class="ScreenColorPicker.MainWindow"
+﻿<!--
+/*
+ * ScreenColorPicker
+ * Copyright (C) 2017  Federico Zanco [federico.zanco (at) gmail.com]
+ * 
+ * This file is part of ScreenColorPicker.
+ * 
+ * ScreenColorPicker is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with ScreenColorPicker; if not, If not, see<http://www.gnu.org/licenses/> .
+ */
+-->
+
+<Window x:Class="ScreenColorPicker.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScreenColorPicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="ScreenColorPicker"
+        Height="240"
+        Width="210"
+        Icon="rgb.png"
+        AllowsTransparency="True"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        Topmost="True">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="CloseCommandHandler" />
+    </Window.CommandBindings>
+
+    <!-- Key Bindings -->
+    <Window.InputBindings>
+        <KeyBinding Key="S"
+                    Command="{Binding StartStopCommand}" />
+        <KeyBinding Key="C"
+                    Modifiers="Ctrl"
+                    Command="{Binding CopyCommand}" />
+        <KeyBinding Key="Esc"
+                    Command="ApplicationCommands.Close" />
+        <KeyBinding Key="O"
+                    Command="{Binding ChangeOriginCommand}"
+                    CommandParameter="Set" />
+        <KeyBinding Key="O"
+                    Modifiers="Ctrl"
+                    Command="{Binding ChangeOriginCommand}"
+                    CommandParameter="Reset" />
+    </Window.InputBindings>
+
+    <Border>
+        <Border.Effect>
+            <DropShadowEffect />
+        </Border.Effect>
+
+        <Grid Margin="5"
+              MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+
+            <!-- Resources -->
+            <Grid.Resources>
+                <!-- BaseBorderStyle -->
+                <Style x:Key="BaseBorderStyle" TargetType="{x:Type Border}">
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+
+                <Style x:Key="DataBorderStyle" TargetType="{x:Type Border}" BasedOn="{StaticResource BaseBorderStyle}">
+                    <Setter Property="Margin" Value="-1,0,0,0" />
+                </Style>
+
+                <!-- LabelStyle -->
+                <Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
+                    <Setter Property="TextAlignment" Value="Center" />
+                    <Setter Property="Padding" Value="1" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Background" Value="Black" />
+                </Style>
+
+                <!-- DataStyle -->
+                <Style x:Key="DataStyle" TargetType="{x:Type TextBlock}">
+                    <Setter Property="TextAlignment" Value="Right" />
+                    <Setter Property="Padding" Value="1" />
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Background" Value="White" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Color -->
+            <Rectangle Fill="{Binding Brush}"
+                       Grid.RowSpan="5"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Right"
+                       Margin="0,0,5,0"
+                       Width="30"
+                       Height="100" />
+
+            <!-- X -->
+            <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Text="X" />
+            </Border>
+            <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource ResourceKey=DataBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding X}" />
+            </Border>
+
+            <!-- Y -->
+            <Border Grid.Row="0" Grid.Column="4" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Text="Y" />
+            </Border>
+            <Border Grid.Row="0" Grid.Column="5" Style="{StaticResource ResourceKey=DataBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding Y}" />
+            </Border>
+
+            <!-- A -->
+            <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Background="Gray" Text="A" />
+            </Border>
+            <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource ResourceKey=DataBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding A}" />
+            </Border>
+
+            <!-- R -->
+            <Border Grid.Row="1" Grid.Column="4" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Background="Red" Text="R" />
+            </Border>
+            <Border Grid.Row="1" Grid.Column="5" Style="{StaticResource ResourceKey=DataBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding R}" />
+            </Border>
+
+            <!-- G -->
+            <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Background="Green" Text="G" />
+            </Border>
+            <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource ResourceKey=DataBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding G}" />
+            </Border>
+
+            <!-- B -->
+            <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Background="Blue" Text="B" />
+            </Border>
+            <Border Grid.Row="2" Grid.Column="5" Style="{StaticResource ResourceKey=DataBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=DataStyle}" Text="{Binding B}" />
+            </Border>
+
+            <!-- Hex -->
+            <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource ResourceKey=BaseBorderStyle}">
+                <TextBlock Style="{StaticResource ResourceKey=LabelStyle}" Text="H" />
+            </Border>
+            <Border Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4" Style="{StaticResource ResourceKey=DataBorderStyle}">
+                <TextBox BorderThickness="0" Foreground="Black" Background="White" TextAlignment="Center" IsReadOnly="True" Text="{Binding Hex, Mode=OneWay}" />
+            </Border>
+
+            <!-- StartStop
+            <Button Grid.Row="4"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="4"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Content="{Binding StartStopCommandLabel}"
+                    Command="{Binding StartStopCommand}" /> -->
+
+            <!-- Zoom -->
+            <Image Grid.Row="4"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="5"
+                   Name="Zoom"
+                   Width="128"
+                   Height="128"
+                   Margin="0,5,0,0"
+                   Source="{Binding ImageSource}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+        </Grid>
+    </Border>
 </Window>
