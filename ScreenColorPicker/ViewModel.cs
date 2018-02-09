@@ -252,7 +252,7 @@ namespace ScreenColorPicker
         }
         #endregion
 
-        #region CopyCommand_Execute
+        #region Copy
         private void CopyCommand_Execute(object parameter)
         {
             Clipboard.SetDataObject(
@@ -263,7 +263,7 @@ namespace ScreenColorPicker
         }
         #endregion
 
-        #region CopyCommand_Execute
+        #region ChangeOrigin
         private void ChangeOriginCommand_Execute(object parameter)
         {
             origin = (string)parameter == "Set" ? position : new Point(0.0, 0.0);
